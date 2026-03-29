@@ -25,6 +25,7 @@ dependencies {
 
 	// 플랜 C: 더 안정적인 Vertex AI Gemini 스타터를 사용합니다.
 	implementation 'org.springframework.ai:spring-ai-vertex-ai-gemini-spring-boot-starter'
+	implementation 'org.springframework.ai:spring-ai-vertex-ai-embedding-spring-boot-starter'
 
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'

@@ -1,3 +1,22 @@
 spring:
   application:
     name: backend
+  ai:
+    vertex:
+      ai:
+        gemini:
+          project-id: talk-to-my-portfolio # 구글 클라우드 프로젝트 ID
+          location: us-central1        # 리전 설정
+          chat:
+            options:
+              model: gemini-2.5-flash-lite
+        embedding:
+          project-id: talk-to-my-portfolio
+          location: us-central1
+          options:
+            model: text-embedding-004
+
+  # 업로드한 포트폴리오 데이터를 저장할 위치 (임시)
+  app:
+    vector-store:
+      path: src/main/resources/vector-store.json
