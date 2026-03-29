@@ -1,54 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import ProjectsSection from "@/components/ProjectsSection";
 
 export default function Home() {
-  const [activeFilter, setActiveFilter] = useState("All");
-
-  // 프로젝트 데이터 (원하는 대로 수정 가능)
-  const projects = [
-    {
-      id: 1,
-      title: "금융 카드 소비 데이터 분석",
-      type: "Team",
-      period: "2026.02 - 2026.03",
-      description: "대용량 금융 데이터를 효율적으로 처리하기 위한 멀티 레이어 아키텍처 설계 및 데이터 복제 구현",
-      tech: ["Java", "Spring", "MySQL", "Nginx"],
-      image: "💳", // 나중에 실제 이미지 경로(e.g., "/project1.png")로 교체하세요
-    },
-    {
-      id: 2,
-      title: "자율주행 Razbot",
-      type: "Team",
-      period: "202X.XX - 202X.XX",
-      description: "라즈베리 파이를 활용한 자율주행 로봇 제어 및 경로 탐색 알고리즘 구현",
-      tech: ["Python", "Raspberry Pi"],
-      image: "🤖",
-    },
-    {
-      id: 3,
-      title: "C++ ATM 금융 시뮬레이터",
-      type: "Personal",
-      period: "202X.XX - 202X.XX",
-      description: "기본적인 금융 거래 로직(입출금, 계좌이체 등)을 객체 지향적으로 설계한 시뮬레이터",
-      tech: ["C++"],
-      image: "🏧",
-    },
-    {
-      id: 4,
-      title: "배달 서비스 백엔드 (Toy)",
-      type: "Personal",
-      period: "202X.XX - 202X.XX",
-      description: "도메인 모델링과 JPA 연관 관계 매핑을 통한 배달 시스템 백엔드 구축",
-      tech: ["Spring Boot", "JPA", "MySQL"],
-      image: "🚚",
-    },
-  ];
-
-  const filteredProjects =
-    activeFilter === "All"
-      ? projects
-      : projects.filter((project) => project.type === activeFilter);
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col gap-32 font-sans">
@@ -128,58 +83,12 @@ export default function Home() {
       <section id="projects" className="flex flex-col gap-8">
         <h2 className="text-3xl font-bold border-b pb-4 border-gray-200 dark:border-gray-700">Projects</h2>
         
-        {/* Filter Buttons */}
-        <div className="flex gap-4 mb-4">
-          {["All", "Team", "Personal"].map((filter) => (
-            <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
-                activeFilter === filter
-                  ? "bg-blue-600 text-white"
-                  : "bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300"
-              }`}
-            >
-              {filter}
-            </button>
-          ))}
-        </div>
+        <p className="text-gray-600 dark:text-gray-400">
+          프로젝트를 클릭하면 상세 내용을 확인하실 수 있습니다.
+        </p>
 
-        {/* Project Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project) => (
-            <div key={project.id} className="group border border-gray-200 dark:border-gray-700 rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 bg-white dark:bg-gray-900 cursor-pointer flex flex-col">
-              {/* Thumbnail Placeholder */}
-              <div className="h-48 bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-6xl">
-                {project.image}
-              </div>
-              
-              <div className="p-6 flex flex-col flex-grow">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 transition-colors">
-                    {project.title}
-                  </h3>
-                  <span className={`text-xs px-2 py-1 rounded-md font-semibold ${project.type === 'Team' ? 'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400' : 'bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400'}`}>
-                    {project.type}
-                  </span>
-                </div>
-                <p className="text-sm text-gray-400 mb-3">{project.period}</p>
-                <p className="text-gray-600 dark:text-gray-300 text-sm mb-6 flex-grow">
-                  {project.description}
-                </p>
-                
-                {/* Tech Icons (Badges) */}
-                <div className="flex flex-wrap gap-1.5 mt-auto">
-                  {project.tech.map((t) => (
-                    <span key={t} className="text-[11px] px-2 py-1 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-md">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        {/* [교체] 기존의 필터 버튼과 카드 그리드 코드를 모두 지우고 이 한 줄만 넣으세요! */}
+        <ProjectsSection />
       </section>
       
     </div>

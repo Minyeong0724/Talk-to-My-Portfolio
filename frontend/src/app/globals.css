@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
   --background: #ffffff;
@@ -23,4 +24,23 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 마크다운 내부의 이미지 뱃지들을 가로로 정렬 */
+.prose img[src*="img.shields.io"] {
+  display: inline-block;
+  margin-right: 0.5rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+/* 표(Table) 스타일 보정 */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+.prose th, .prose td {
+  border: 1px solid #e5e7eb;
+  padding: 0.75rem;
 }
