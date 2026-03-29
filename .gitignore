@@ -1,0 +1,24 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Frontend (Next.js)
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+frontend/.env*
+frontend/.vercel
+
+# Backend (Spring Boot)
+backend/.gradle/
+backend/build/
+backend/out/
+backend/bin/
+backend/.idea/
+backend/*.iml
+
+# API Keys (보안 중요)
+*.key
+*.pem
+# application.yml에 직접 키를 썼다면 아래처럼 예외처리하거나 환경변수를 쓰세요
+# backend/src/main/resources/application.yml
