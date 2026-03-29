@@ -1,1 +1,20 @@
-rootProject.name = 'dev'
+pluginManagement {
+    repositories {
+        google() // 구글 전용 저장소 추가 [cite: 60]
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google() // 의존성 해결을 위해 여기에도 추가합니다 [cite: 60]
+        mavenCentral()
+        // 커스텀 URL 선언 시 uri() 형식을 사용합니다 [cite: 80]
+        maven { url = uri("https://repo.spring.io/milestone") }
+        maven { url = uri("https://repo.spring.io/snapshot") }
+    }
+}
+
+rootProject.name = 'backend'
