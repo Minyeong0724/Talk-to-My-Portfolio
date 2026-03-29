@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ReactMarkdown from 'react-markdown';
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -84,7 +85,15 @@ export default function Chatbot() {
                   <div className={`max-w-[80%] p-3 rounded-2xl text-sm ${
                     msg.role === "user" ? "bg-blue-500 text-white" : "bg-gray-100 dark:bg-gray-800 dark:text-gray-200"
                   }`}>
-                    {msg.content}
+                    {msg.role === "ai" ? (
+                      <div className="markdown-content prose dark:prose-invert max-w-none text-sm leading-relaxed">
+                        <ReactMarkdown>
+                          {msg.content}
+                        </ReactMarkdown>
+                      </div>
+                    ) : (
+                      msg.content
+                    )}
                   </div>
                 </div>
               ))
