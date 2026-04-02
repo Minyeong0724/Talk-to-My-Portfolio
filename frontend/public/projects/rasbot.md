@@ -13,6 +13,12 @@
 
 ---
 
+## 🖼️ 작업 화면
+
+![demo](https://github.com/99sphere/2024-Spring-System-Programming/assets/59161083/beb5565a-b684-4464-973a-12047003a68c)
+
+---
+
 ## 🚀 주요 기능 및 특징
 
 * **실시간 위치 인식 (Localization)**: OpenCV를 활용해 맵 각 교차로의 QR 코드를 스캔하여 `(x, y)` 좌표 정보를 실시간으로 획득합니다.
@@ -66,9 +72,4 @@
 * **A* 알고리즘 도입**: 단기적 보상에 집중하는 Greedy 방식에서 벗어나, 전역적인 최적 경로를 탐색하는 알고리즘으로 고도화할 예정입니다.
 * **강화학습 적용**: 맵 상태와 상대방의 위치를 State로 정의하고, 최적의 Action(이동/폭탄 설치)을 결정하는 **DQN 기반 정책 결정** 시스템으로의 확장을 고려하고 있습니다.
 
----
-
-## 🖼️ 작업 화면
-
-![demo](https://github.com/99sphere/2024-Spring-System-Programming/assets/59161083/beb5565a-b684-4464-973a-12047003a68c)
 
