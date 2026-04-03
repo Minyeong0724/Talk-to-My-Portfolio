@@ -5,18 +5,22 @@ spring:
     vertex:
       ai:
         gemini:
-          project-id: talk-to-my-portfolio # 구글 클라우드 프로젝트 ID
+          project-id: ${GEMINI_PROJECT_ID} # 구글 클라우드 프로젝트 ID
           location: us-central1        # 리전 설정
           chat:
             options:
               model: gemini-2.5-flash-lite
         embedding:
-          project-id: talk-to-my-portfolio
+          project-id: ${GEMINI_PROJECT_ID}
           location: us-central1
           options:
             model: text-embedding-004
-
-  # 업로드한 포트폴리오 데이터를 저장할 위치 (임시)
-  app:
-    vector-store:
-      path: src/main/resources/vector-store.json
+    vectorstore:
+      qdrant:
+        host: ${QDRANT_HOST}
+        port: 6334
+        api-key: ${QDRANT_API_KEY}
+        use-tls: true
+        collection-name: ${QDRANT_COLLECTION}
+app:
+  init-vector-store: false

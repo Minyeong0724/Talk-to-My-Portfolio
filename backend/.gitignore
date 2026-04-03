@@ -1,0 +1,18 @@
+.env
+*.json
+!greeting.json 
+
+### macOS ###
+.DS_Store
+.AppleDouble
+.LSOverride
+
+### IntelliJ IDEA ###
+.idea/
+*.iml
+*.iws
+out/
+
+### Gradle ###
+.gradle/
+build/
