@@ -1,7 +1,7 @@
 # 🔊 Spectral Gating 알고리즘 기반 음성 노이즈 제거 (Noise Reduce)
 **MATLAB Implementation of Spectral Gating for Speech Enhancement**
 
-**2025. 04 ~ 2025. 05 (디지털 신호처리 팀 프로젝트)**
+**2025. 04 ~ 2025. 05 (DGIST '디지털 신호처리' 3인 팀 프로젝트)**
 
 ![MATLAB](https://img.shields.io/badge/MATLAB-ED8B00?style=flat-square&logo=mathworks&logoColor=white) ![Signal Processing](https://img.shields.io/badge/Signal%20Processing-007ACC?style=flat-square&logo=audio-technica&logoColor=white) ![Simulink](https://img.shields.io/badge/Simulink-E11E22?style=flat-square&logo=mathworks&logoColor=white)
 

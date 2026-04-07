@@ -1,7 +1,7 @@
 # 💳 소비 성향 분석 리포트: 내 소비는 평균일까?
 **Large-scale Card Consumption Data Analysis & High-Availability Infrastructure**
 
-**2026. 02 ~ 2026. 03 (우리FIS 아카데미 Toy Project)**
+**2026. 02 ~ 2026. 03 (우리FIS 아카데미 4인 팀 프로젝트)**
 
 ![Java](https://img.shields.io/badge/Java-007396?style=flat-square&logo=java&logoColor=white) ![Servlet](https://img.shields.io/badge/Servlet-007396?style=flat-square&logo=java&logoColor=white) ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white) ![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat-square&logo=nginx&logoColor=white) ![Tomcat](https://img.shields.io/badge/Apache%20Tomcat-F8DC75?style=flat-square&logo=apachetomcat&logoColor=black) ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
 
@@ -12,6 +12,14 @@
 [👉 깃허브 저장소 바로가기](https://github.com/khmandarrin/fisa-servlet-project)
 
 ---
+
+## 🖼️ 작업 화면
+*이미지를 클릭하면 크게 볼 수 있습니다.*
+
+| 개인 소비 분석 (Pie Chart) | 또래 집단 비교 대시보드 |
+| :---: | :---: |
+| ![Dashboard1](https://github.com/user-attachments/assets/8e0b988f-9b52-4073-a8ac-ed1802c75f52) | ![Dashboard2](https://github.com/user-attachments/assets/375c888a-6bca-4cda-96e1-166fcd6299b3) |
+
 
 ## 🚀 주요 기능 및 특징
 
@@ -33,9 +41,6 @@
 * **성능 개선(Indexing)**: 대시보드 로딩 시 1분 이상 소요되던 Full Table Scan 문제를 `SEQ` 컬럼 인덱스 추가를 통해 획기적으로 개선했습니다.
 * **이상 데이터 정제**: 소비 내역 분석 중 소분류의 합이 대분류와 일치하지 않는 이상 데이터를 직접 발견하여 배제하는 등 엄밀한 품질 관리를 수행했습니다.
 * **DB 정규화**: 대용량 환경에 맞춰 DB 정규화를 진행하고, 하드웨어 성능을 효율적으로 활용하기 위한 데이터 모델링을 수행했습니다.
-
-### **3. 시스템 필터 및 보안 적용**
-* **전역 인코딩 및 인증 제어**: `CharacterEncodingFilter`를 통한 UTF-8 처리와 `AuthFilter`를 활용한 미인증 요청 차단 로직을 구현하여 보안성을 강화했습니다.
 
 ---
 
@@ -84,12 +89,5 @@
 * **데이터 엔지니어링 경험**: 530만 건이라는 실제 대규모 데이터를 다루며 인덱스 설계의 중요성과 데이터 정합성 관리의 복잡성을 직접 체감하고 해결했습니다.
 * **성능 최적화 역량**: 병목 현상을 진단하고 인덱싱 등의 조치를 통해 사용자 경험(UX)을 개선하는 일련의 과정을 성공적으로 완수했습니다.
 
----
 
-## 🖼️ 작업 화면
-*이미지를 클릭하면 크게 볼 수 있습니다.*
-
-| 개인 소비 분석 (Pie Chart) | 또래 집단 비교 대시보드 |
-| :---: | :---: |
-| ![Dashboard1](https://github.com/user-attachments/assets/8e0b988f-9b52-4073-a8ac-ed1802c75f52) | ![Dashboard2](https://github.com/user-attachments/assets/375c888a-6bca-4cda-96e1-166fcd6299b3) |
 

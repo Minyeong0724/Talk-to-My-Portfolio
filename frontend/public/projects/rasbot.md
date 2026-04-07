@@ -1,7 +1,7 @@
 # 🤖 QR코드 기반 위치 인식을 활용한 자율주행 라즈봇의 실시간 전략 시스템
 **QR-Code Based Autonomous Razbot Real-time Strategy System**
 
-**2024. 05 ~ 2024. 06 (시스템 프로그래밍 팀 프로젝트)**
+**2024. 05 ~ 2024. 06 (DGIST '시스템 프로그래밍' 4인 팀 프로젝트)**
 
 ![C](https://img.shields.io/badge/C-A8B9CC?style=flat-square&logo=c&logoColor=white) ![C++](https://img.shields.io/badge/C++-00599C?style=flat-square&logo=cplusplus&logoColor=white) ![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=flat-square&logo=opencv&logoColor=white) ![Raspberry Pi](https://img.shields.io/badge/Raspberry%20Pi-A22846?style=flat-square&logo=raspberrypi&logoColor=white) ![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black)
 
@@ -32,7 +32,7 @@
 ## 🛠️ 기여 부분 (Technical Contribution)
 
 ### **1. 멀티스레드 기반 서버-클라이언트 통신 시스템 구축**
-* **데이터 무결성 확보**: `main`, `QR 인식`, `Map 데이터 수신` 스레드 간 공유 자원(현재 좌표, 맵 상태) 접근 시 **POSIX Mutex(`pthread_mutex_t`)**를 사용하여 Race Condition을 방지했습니다.
+* **데이터 무결성 확보**: `main`, `QR 인식`, `Map 데이터 수신` 스레드 간 공유 자원(현재 좌표, 맵 상태) 접근 시 **POSIX Mutex(`pthread_mutex_t`)** 를 사용하여 Race Condition을 방지했습니다.
 * **효율적인 데이터 파싱**: 서버로부터 수신한 `DGIST` 구조체 데이터를 실시간으로 파싱하여 로컬 메모리에 동기화하고, 메인 알고리즘이 즉각 참조할 수 있는 구조를 설계했습니다.
 
 ### **2. OpenCV를 활용한 실시간 위치 파싱 모듈 구현**
@@ -44,7 +44,7 @@
 * **위기 탈출 로직**: 진행 방향이 트랩이나 맵 경계로 막혔을 때, 180도 회전을 강제하여 시스템이 고립(Stuck)되지 않도록 예외 처리 코드를 작성했습니다.
 
 ### **4. 하드웨어 파라미터 최적화 및 튜닝**
-* **환경 적응형 제어**: 조명 밝기(자연광/인공조명)와 바닥 마찰력에 민감한 조도 센서의 임계값(Threshold)을 현장 데이터 기반으로 **경험적 튜닝(Empirical Tuning)**하여 주행 성공률을 극대화했습니다.
+* **환경 적응형 제어**: 조명 밝기(자연광/인공조명)와 바닥 마찰력에 민감한 조도 센서의 임계값(Threshold)을 현장 데이터 기반으로 **경험적 튜닝(Empirical Tuning)** 하여 주행 성공률을 극대화했습니다.
 
 ---
 
@@ -69,7 +69,7 @@
 
 ## 🔍 향후 개선 방향
 
-* **A* 알고리즘 도입**: 단기적 보상에 집중하는 Greedy 방식에서 벗어나, 전역적인 최적 경로를 탐색하는 알고리즘으로 고도화할 예정입니다.
+* **A\* 알고리즘 도입**: 단기적 보상에 집중하는 Greedy 방식에서 벗어나, 전역적인 최적 경로를 탐색하는 알고리즘으로 고도화할 예정입니다.
 * **강화학습 적용**: 맵 상태와 상대방의 위치를 State로 정의하고, 최적의 Action(이동/폭탄 설치)을 결정하는 **DQN 기반 정책 결정** 시스템으로의 확장을 고려하고 있습니다.
 
 

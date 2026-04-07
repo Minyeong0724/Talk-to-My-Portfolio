@@ -2,7 +2,7 @@
 **Visible Light Image Synthesis for Astrophotography Enhancement**
 
 
-**2025.09 ~ 2025.12 DIP(Digital Image Processing) Term Project**
+**2025.09 ~ 2025.12 (DGIST '디지털 영상처리' 2인 팀 프로젝트)**
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white) ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white) ![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=flat-square&logo=opencv&logoColor=white) ![NumPy](https://img.shields.io/badge/NumPy-013243?style=flat-square&logo=numpy&logoColor=white)
 
@@ -57,7 +57,7 @@
 ## 🖼️ 작업 화면
 *이미지를 클릭하면 크게 볼 수 있습니다.*
 
-| 전처리 전 (원본) | 전처리 후 (추출) | 합성 결과 (최종) |
+| Image Stacking | DL Framework | Astroalign Library |
 | :---: | :---: | :---: |
-| ![Original](https://github.com/user-attachments/assets/light_frame_example) | ![Preprocessed](https://github.com/user-attachments/assets/preprocessed_star) | ![Final](https://github.com/user-attachments/assets/final_result) |
+| ![Image Stacking](/images/DIP/Image_stacking_center_crop.png) | ![DL Framework](/images/DIP/Image_DL_center_crop.png) | ![Astroalign Library](/images/DIP/Image_astroalign_center_crop.png) |
 
