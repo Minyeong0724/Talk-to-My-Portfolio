@@ -8,7 +8,7 @@ import talk_to_my_portfolio.dev.service.ChatService;
 @RequestMapping("/api/chat")
 @RequiredArgsConstructor
 // 프론트엔드 주소를 명시해줍니다. (포트번호 3000 확인!)
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "${app.frontend.url}")
 public class ChatController {
 
     private final ChatService chatService;

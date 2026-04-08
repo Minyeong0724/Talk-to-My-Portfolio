@@ -18,12 +18,14 @@ export default function Chatbot() {
     setInput("");
     setIsLoading(true);
 
+    const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
+
     try {
-      // 백엔드 주소와 포트 확인 (localhost:8080)
-      const response = await fetch("http://localhost:8080/api/chat/ask", {
+      // 수정된 부분: 백엔드 주소를 변수로 처리
+      const response = await fetch(`${BACKEND_URL}/api/chat/ask`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: text }), // 백엔드 ChatRequest 구조와 일치
+        body: JSON.stringify({ message: text }),
       });
 
       if (!response.ok) throw new Error("네트워크 응답에 문제가 있습니다.");

@@ -38,7 +38,6 @@ public class ChatService {
 
     public String getChatResponse(String message) {
         return chatClient.prompt()
-                // 시스템 프롬프트를 주입합니다.
                 .system(SYSTEM_PROMPT_TEMPLATE)
                 .user(message)
                 .advisors(new QuestionAnswerAdvisor(vectorStore))

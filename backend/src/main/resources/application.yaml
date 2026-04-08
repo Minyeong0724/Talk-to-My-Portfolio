@@ -24,3 +24,5 @@ spring:
         collection-name: ${QDRANT_COLLECTION}
 app:
   init-vector-store: false
+  frontend:
+    url: ${FRONTEND_URL:http://localhost:3000}

@@ -1,4 +1,4 @@
-# 🌌 가시광 영역 이미지 합성을 이용한 천체 사진 화질 개선
+# 가시광 영역 이미지 합성을 이용한 천체 사진 화질 개선
 **Visible Light Image Synthesis for Astrophotography Enhancement**
 
 
@@ -12,7 +12,7 @@
 
 ---
 
-## 🚀 주요 기능 및 특징
+##  주요 기능 및 특징
 
 * **노이즈 저감 파이프라인**: 105장의 Dark 이미지와 100장의 Light 이미지를 활용하여 센서 고유의 열 및 전기적 노이즈를 효과적으로 제거합니다.
 * **BatchAlignmentModel (DL)**: PyTorch를 활용해 이미지 간의 기하학적 변환 파라미터를 추정하고 Affine Transformation 행렬을 예측합니다.
