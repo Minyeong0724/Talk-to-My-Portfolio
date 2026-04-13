@@ -6,7 +6,7 @@ const ProjectsSection = () => {
   const [selectedPath, setSelectedPath] = useState<string | null>(null);
 
   return (
-    <section className="py-20">
+    <section className="py-10">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project) => (
           <div 
