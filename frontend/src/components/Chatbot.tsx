@@ -1,18 +1,27 @@
-"use client";
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { Send, X, Sparkles, User, Bot } from 'lucide-react';
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(""); 
   const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  // 메시지 전송 로직
+  const exampleQuestions = [
+    { icon: '📝', text: '민영님에 대해 알아보기' },
+    { icon: '📨', text: '연락처 확인' },
+    { icon: '👩‍💻', text: '대표 프로젝트 확인' },
+    { icon: '📄', text: '백엔드 프로젝트는 어떤 걸 했나요?' },
+    { icon: '📄', text: 'SW 프로젝트는 어떤 걸 했나요?' }
+  ];
+
   const handleSendMessage = async (text: string) => {
-    if (!text.trim() || isLoading) return; // 로딩 중이거나 빈 값일 때 실행 방지
-    
+    if (!text.trim() || isLoading) return;
+
+    setIsOpen(true); 
     const userMessage = { role: "user", content: text };
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
@@ -21,7 +30,6 @@ export default function Chatbot() {
     const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8080";
 
     try {
-      // 수정된 부분: 백엔드 주소를 변수로 처리
       const response = await fetch(`${BACKEND_URL}/api/chat/ask`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -30,7 +38,7 @@ export default function Chatbot() {
 
       if (!response.ok) throw new Error("네트워크 응답에 문제가 있습니다.");
       
-      const data = await response.text();
+      const data = await response.text(); 
       setMessages((prev) => [...prev, { role: "ai", content: data }]);
     } catch (error) {
       console.error("Error:", error);
@@ -42,96 +50,121 @@ export default function Chatbot() {
 
   return (
     <>
-      {/* 1. 플로팅 버튼 */}
+      {/* 1. 메인 프롬프트 입력창 & 추천 리스트 (중앙 배치용) */}
+      <div className="flex flex-col items-center w-full gap-6">
+        <div className="relative w-full group">
+          <input
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.nativeEvent.isComposing) return;
+              if (e.key === 'Enter') {
+                handleSendMessage(input);
+              }
+            }}
+            placeholder="민영 님에 대해 무엇이든 물어보세요.."
+            className="w-full px-4 py-2 pr-16 rounded-2xl border-2 border-blue-100 bg-white dark:bg-gray-800 dark:border-gray-700 focus:border-blue-400 focus:outline-none shadow-sm transition-all text-md"
+          />
+          <button 
+            onClick={() => handleSendMessage(input)}
+            disabled={isLoading}
+            className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-gray-100 dark:bg-gray-700 rounded-full hover:bg-blue-500 hover:text-white transition-all">
+              <Send className="w-4 h-4" />
+          </button>
+        </div>
+
+        <div className="flex flex-wrap justify-center gap-3 w-full">
+          {exampleQuestions.map((q, idx) => (
+            <button
+              key={idx}
+              onClick={() => handleSendMessage(q.text)}
+              className="cursor-pointer flex items-center gap-2 px-5 py-3 rounded-full bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:border-blue-400 hover:text-blue-600 hover:shadow-md transition-all text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
+              <span>{q.icon}</span>
+              <span>{q.text}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* 2. 우측 하단 고정 로봇 버튼 (유지) */}
       <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 w-14 h-14 bg-white dark:bg-gray-800 rounded-full shadow-2xl flex items-center justify-center text-3xl border border-gray-200 dark:border-gray-700 hover:scale-110 transition-transform z-50"
+        onClick={() => setIsOpen(true)}
+        className="fixed bottom-8 right-8 w-16 h-16 bg-blue-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform z-40"
       >
-        {isOpen ? "✕" : "🤖"}
+        <Bot className="w-8 h-8" />
       </button>
 
-      {/* 2. 챗봇 모달창 */}
+      {/* 3. 챗봇 모달창 (유지) */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 w-[400px] h-[600px] bg-white dark:bg-gray-900 rounded-3xl shadow-2xl border border-gray-200 dark:border-gray-700 flex flex-col overflow-hidden z-50 animate-in fade-in slide-in-from-bottom-4 duration-300">
-          
-          {/* 헤더 생략 (동일) */}
-
-          {/* 본문 (메시지 내역 및 제안 목록) */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-4">
-            {messages.length === 0 ? (
-              // 초기 화면
-              <div className="flex flex-col items-center gap-4 mt-4">
-                <div className="w-12 h-12 bg-gray-100 dark:bg-gray-800 rounded-xl flex items-center justify-center text-2xl">🪄</div>
-                <h2 className="text-xl font-bold dark:text-white text-center">강력한 성능의 Minyeong AI</h2>
-                <div className="space-y-2 w-full">
-                  {[
-                    { icon: "🦆", text: "민영님에 대해 알아보기" },
-                    { icon: "🔍", text: "기술 스택 상세 보기" },
-                    { icon: "✅", text: "연락처 확인" },
-                  ].map((item, idx) => (
-                    <button 
-                      key={idx} 
-                      onClick={() => handleSendMessage(item.text)}
-                      className="w-full flex items-center gap-3 p-3 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-xl text-left transition-colors"
-                    >
-                      <span>{item.icon}</span>
-                      <span className="text-sm font-medium">{item.text}</span>
-                    </button>
-                  ))}
-                </div>
+        <div 
+          onClick={() => setIsOpen(false)} 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
+        >
+          <div 
+            onClick={(e) => e.stopPropagation()} 
+            className="bg-white dark:bg-gray-900 w-full max-w-4xl h-[85vh] rounded-[32px] shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in duration-300"
+          >
+            <div className="p-6 border-b flex justify-between items-center bg-gray-50 dark:bg-gray-800/50">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-blue-500" />
+                <span className="font-bold text-gray-900 dark:text-white">Minyeong AI Chat</span>
               </div>
-            ) : (
-              // 채팅 내역 출력
-              messages.map((msg, idx) => (
-                <div key={idx} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-                  <div className={`max-w-[80%] p-3 rounded-2xl text-sm ${
-                    msg.role === "user" ? "bg-blue-500 text-white" : "bg-gray-100 dark:bg-gray-800 dark:text-gray-200"
+              <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-gray-200 dark:hover:bg-gray-700 rounded-full transition-colors">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto p-8 space-y-6 text-left">
+              {messages.length === 0 && (
+                <div className="h-full flex flex-col items-center justify-center text-gray-400 opacity-50">
+                  <Bot className="w-16 h-16 mb-4" />
+                  <p>궁금한 점을 입력해주세요!</p>
+                </div>
+              )}
+              {messages.map((msg, idx) => (
+                <div key={idx} className={`flex gap-4 ${msg.role === 'user' ? 'flex-row-reverse' : 'justify-start'}`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${msg.role === 'user' ? 'bg-blue-600' : 'bg-gray-100 dark:bg-gray-800'}`}>
+                    {msg.role === 'user' ? <User className="w-4 h-4 text-white" /> : <Bot className="w-4 h-4 text-gray-600 dark:text-gray-300" />}
+                  </div>
+                  <div className={`max-w-[85%] p-4 rounded-2xl text-sm leading-relaxed shadow-sm text-left ${
+                    msg.role === 'user' ? 'bg-blue-600 text-white rounded-tr-none' : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-tl-none'
                   }`}>
                     {msg.role === "ai" ? (
-                      <div className="markdown-content prose dark:prose-invert max-w-none text-sm leading-relaxed">
-                        <ReactMarkdown>
-                          {msg.content}
-                        </ReactMarkdown>
+                      <div className="markdown-content prose dark:prose-invert max-w-none text-left leading-relaxed">
+                        <ReactMarkdown>{msg.content}</ReactMarkdown>
                       </div>
                     ) : (
                       msg.content
                     )}
                   </div>
                 </div>
-              ))
-            )}
-            {isLoading && <div className="text-xs text-gray-400 animate-pulse">AI가 답변을 생각 중입니다...</div>}
-          </div>
+              ))}
+              {isLoading && (
+                <div className="flex gap-4 animate-pulse">
+                  <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 shrink-0" />
+                  <div className="h-12 w-48 bg-gray-100 dark:bg-gray-800 rounded-2xl" />
+                </div>
+              )}
+            </div>
 
-          {/* 하단 입력창 */}
-          <div className="p-4 bg-white dark:bg-gray-900">
-            <div className="relative border-2 border-blue-400 rounded-2xl p-4 shadow-sm bg-white dark:bg-gray-800">
-              <textarea 
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => {
-                  // [해결] 한글 조합 중(isComposing)일 때는 전송하지 않도록 막습니다.
-                  if (e.nativeEvent.isComposing) return; 
-
-                  if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    handleSendMessage(input);
-                  }
-                }}
-                placeholder="AI로 무엇이든 시도해 보세요..."
-                disabled={isLoading} // [추가] 전송 중에는 입력을 막습니다.
-                className="w-full bg-transparent border-none focus:ring-0 text-sm resize-none dark:text-white"
-                rows={2}
-              />
-              <div className="flex justify-end mt-2">
-                <button 
-                  onClick={() => handleSendMessage(input)}
-                  disabled={isLoading}
-                  className={`w-8 h-8 rounded-full flex items-center justify-center text-sm ${
-                    input.trim() ? "bg-blue-500 text-white" : "bg-gray-100 text-gray-400"
-                  }`}
-                >
-                  ↑
+            <div className="p-6 border-t bg-white dark:bg-gray-900">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="추가로 궁금한 점을 물어보세요..."
+                  onKeyDown={(e) => {
+                    if (e.nativeEvent.isComposing) return;
+                    if (e.key === 'Enter') {
+                      handleSendMessage((e.target as HTMLInputElement).value);
+                      (e.target as HTMLInputElement).value = '';
+                    }
+                  }}
+                  className="w-full p-4 pr-12 rounded-xl border border-gray-200 dark:border-gray-700 focus:border-blue-400 focus:outline-none dark:bg-gray-800 dark:text-white"
+                />
+                <button className="absolute right-3 top-1/2 -translate-y-1/2 text-blue-600">
+                  <Send className="w-5 h-5" />
                 </button>
               </div>
             </div>
